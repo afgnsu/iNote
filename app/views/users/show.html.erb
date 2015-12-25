@@ -9,7 +9,7 @@
         <% @categories.each do |category| %>
           <%= link_to "#" do %>
             <li class="list-group-item">
-              <span class="badge">1</span>
+              <span class="badge"><%= category.notes_count %></span>
               <% if category.private %>
                 <span class="glyphicon glyphicon-lock"></span>
               <% end %> 
