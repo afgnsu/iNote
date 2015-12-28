@@ -13,6 +13,11 @@ class CategoriesController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @category = Category.find(params[:id])
+    @notes = @category.notes.all           
+  end
   
   private
     
