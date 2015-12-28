@@ -6,10 +6,20 @@
   <% else %>
     <% @notes.each do |note| %>
       <div class="col-md-4">
-        <h3><%= note.title %></h3>
-        <p><%= note.description %></p>
-        <p><%= link_to "Go!", full_url(note.link), target: "_blank" %></p>
-        <%= image_tag "http://dummyimage.com/150x150", alt: "Test" %>
+        <% if note.title.blank? %>
+          <h3><%= note.link_title %></h3>
+        <% else %>
+          <h3><%= note.title %></h3>
+        <% end %>
+        <% if note.description.blank? %>
+          <p><%= truncate(note.link_description, length: 50) %></p>
+        <% else %>
+          <p><%= truncate(note.description, length: 50) %></p>
+        <% end %>        
+        <p>
+          <%= link_to "Go!", note.link, target: "_blank", "title": "#{note.link_title}", "data-toggle": "popover", "data-trigger": "hover", "data-content": "<p>#{truncate(note.link_description, length: 100)}</p>" %>
+        </p>
+        <%= image_tag note.link_picture, alt: note.description, size: "250x250" %>
       </div>
     <% end %>   
   <% end %>

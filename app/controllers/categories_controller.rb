@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @notes = @category.notes.all           
+    @notes = @category.notes.all
   end
   
   private
