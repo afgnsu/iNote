@@ -16,4 +16,13 @@ module ApplicationHelper
     
     alerts.join("\n").html_safe
   end
+
+  def full_url(link)
+    if link.include? "http://" or link.include? "https://" 
+      link
+    else
+      "http://#{link}"
+    end
+  end
+  
 end

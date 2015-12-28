@@ -7,7 +7,8 @@
     <% @notes.each do |note| %>
       <div class="col-md-4">
         <h3><%= note.title %></h3>
-        <p><%= note.description %></p>     
+        <p><%= note.description %></p>
+        <p><%= link_to "Go!", full_url(note.link), target: "_blank" %></p>
         <%= image_tag "http://dummyimage.com/150x150", alt: "Test" %>
       </div>
     <% end %>   
