@@ -18,3 +18,9 @@
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({html: true});   
 });
+
+jQuery(function($) {
+  $("tr[data-link]").click(function() {
+    window.open(this.dataset.link);
+  });
+})

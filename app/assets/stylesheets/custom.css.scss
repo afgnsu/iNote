@@ -36,6 +36,21 @@ span.glyphicon-flash {
     color: #ff9900;
 }
 
+span.glyphicon-star-gold {
+  font-size: 1em;
+  color: #C98910 !important;
+}
+
+span.glyphicon-star-silver {
+  font-size: 1em;
+  color: #A8A8A8 !important;
+}
+
+span.glyphicon-star-bronze {
+  font-size: 1em;
+  color: #965A38 !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -111,4 +126,10 @@ li.list-flash {
 .no-padding-right {
   padding-right: 0 !important;
   margin-right: 0 !important;
+}
+
+/*table*/
+
+tr.tr-go { 
+  cursor: pointer; 
 }

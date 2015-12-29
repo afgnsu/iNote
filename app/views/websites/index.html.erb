@@ -1,0 +1,36 @@
+<h1>Website Ranking</h1>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Host</th>
+        <th>Description</th>
+        <th>Noted</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @websites.each do |website| %>     
+      <tr data-link=<%= "#{website.scheme}://#{website.host}" %> class="tr-go">
+        <td>
+          <h4>
+            <% @rank = @rank + 1 %>
+            <% case @rank %>
+            <% when 1 %>
+              <span class="glyphicon glyphicon-star glyphicon-star-gold"></span>
+            <% when 2 %>
+              <span class="glyphicon glyphicon-star glyphicon-star-silver"></span>
+            <% when 3 %>
+              <span class="glyphicon glyphicon-star glyphicon-star-bronze"></span> 
+            <% else %>
+               <%= @rank %> 
+            <% end %>
+          </h4>
+        </td>
+        <td><h4><%= website.host %></h4></td>
+        <td><h4><%= website.title %></h4></td>
+        <td><h4><%= website.count %></h4></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
