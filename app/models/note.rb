@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
   before_save :full_link
   before_save :add_link_information
+  before_save :increase_website_count
   belongs_to :category, :counter_cache => true
   
   private
@@ -19,6 +20,17 @@ class Note < ActiveRecord::Base
       if object.images.length != 0 
         self.link_picture = object.images.first.src.to_s
       end
+    end
+  end
+  
+  def increase_website_count
+    uri = URI(link)
+    website = Website.find_by(host: uri.host)
+    if website.nil?
+      object = LinkThumbnailer.generate("#{uri.scheme}://#{uri.host}")  
+      Website.create(host: uri.host, scheme: uri.scheme, title: object.title, count: 1)
+    else
+      Website.increment_counter(:count, website.id)
     end
   end
 end
