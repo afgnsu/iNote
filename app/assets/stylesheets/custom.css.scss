@@ -31,6 +31,11 @@ body {
 
 /* typography */
 
+span.glyphicon-flash {
+    font-size: 1.4em;
+    color: #ff9900;
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -66,7 +71,8 @@ p {
 }
 
 #btn-flash {
-  margin-top: 30px;  
+  margin-top: 30px; 
+  font-size: 1.4em;
 }
 
 #btn-add {
@@ -84,4 +90,25 @@ p {
 
 .popover {
     max-width: 50%;
+}
+
+/*list-group*/
+
+li.list-flash {
+  border: 0 none;
+}
+
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
 }

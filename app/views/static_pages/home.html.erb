@@ -4,7 +4,9 @@
       No time to review all the information you noted? Let us FLASH it for you!
   </h2>
   <% if signed_in? %>
-      <%= link_to "Flash now!", "#", class: "btn btn-lg btn-primary", id: "btn-flash" %>
+      <%= link_to "#", class: "btn btn-lg btn-primary", id: "btn-flash" do %>
+          <span class="glyphicon glyphicon-flash"></span> Flash Now !
+      <% end %>
   <% else %>
       <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary", id: "btn-signup" %>
   <% end %>
