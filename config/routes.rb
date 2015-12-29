@@ -12,6 +12,14 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :users do
+    resources :categories do
+      member do
+        get :flashcard
+      end
+    end
+  end  
+  
   resources :websites
   
   # Example of regular route:

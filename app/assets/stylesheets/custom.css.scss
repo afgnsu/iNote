@@ -32,8 +32,12 @@ body {
 /* typography */
 
 span.glyphicon-flash {
-    font-size: 1.4em;
-    color: #ff9900;
+  font-size: 1.4em;
+  color: #ff9900;
+}
+
+span.glyphicon-flash-disable {
+  color: #666666 !important;  
 }
 
 span.glyphicon-star-gold {
@@ -132,4 +136,10 @@ li.list-flash {
 
 tr.tr-go { 
   cursor: pointer; 
+}
+
+/* image */
+.img-center {
+    display: block !important;
+    margin: 0 auto;
 }

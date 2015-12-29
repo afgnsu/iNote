@@ -19,6 +19,11 @@ class CategoriesController < ApplicationController
     @notes = @category.notes.all
   end
   
+  def flashcard
+    @category = Category.find(params[:id])
+    @note = @category.notes.order("RANDOM()").first
+  end
+  
   private
     
     def category_params 
