@@ -1,5 +1,18 @@
 <div class="container">
   <h2><%= @category.name %></h2>
+  <div class="row">
+    <div class="col-md-1 col-md-offset-11">
+      <div class="dropdown pull-right">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sorting
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li class=<%= li_active(@sort_now,"newest") %> ><%= link_to "From Newest", user_category_path(current_user,@category, sort: "newest"), class: link_sort_active(@sort_now,"newest") %></li>
+        <li class=<%= li_active(@sort_now,"oldest") %> ><%= link_to "From Oldest", user_category_path(current_user,@category, sort: "oldest"), class: link_sort_active(@sort_now,"oldest") %></li>
+      </ul>
+      </div> 
+    </div>
+  </div>
+  <hr>
   <% if @notes.empty? %>
     <br>
     <h4>You don't have any notes for this category now!</h4>

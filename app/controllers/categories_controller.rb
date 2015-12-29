@@ -15,8 +15,20 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
-    @notes = @category.notes.all
+    case params[:sort]
+    when "newest"
+      @category = Category.find(params[:id])
+      @notes = @category.notes.order('updated_at DESC').all
+      @sort_now = "newest"
+    when "oldest"
+      @category = Category.find(params[:id])
+      @notes = @category.notes.order('updated_at ASC').all
+      @sort_now = "oldest"
+    else #newest
+      @category = Category.find(params[:id])
+      @notes = @category.notes.order('updated_at DESC').all    
+      @sort_now = "newest"
+    end
   end
   
   def flashcard
