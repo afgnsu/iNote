@@ -5,7 +5,7 @@
   </h2>
   <% if signed_in? %>
       <div class="row">
-          <%= link_to "#", class: "btn btn-lg btn-primary", id: "btn-flash" do %>
+          <%= link_to flashcard_user_path(current_user), class: "btn btn-lg btn-primary", id: "btn-flash" do %>
               <span class="glyphicon glyphicon-flash"></span> Flash Now !
           <% end %>
       </div>
