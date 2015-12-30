@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   
   resources :websites
   
+  post '/users/:user_id/notes/quick_create' => 'notes#quick_create', as: :user_quick_creat_note
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

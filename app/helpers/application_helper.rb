@@ -17,4 +17,8 @@ module ApplicationHelper
     alerts.join("\n").html_safe
   end
 
+  def is_numeric(input)
+    true if Integer(input) rescue false
+  end  
+  
 end

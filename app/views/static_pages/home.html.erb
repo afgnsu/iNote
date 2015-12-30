@@ -15,17 +15,34 @@
 </div>
 <% if signed_in? %>
   <div class="row">
-      <%= form_tag "#" do %>
-          <div class="col-md-8 col-md-offset-1">
+      <%= form_for @note, url:  user_quick_creat_note_path(current_user) do |f| %>
+          <div class="col-md-6 col-md-offset-1">
               <div class="form-group">
-                  <%= text_field_tag :quick_link, params[:link], class: "form-control", :placeholder => "Enter the url" %>
+                  <%= f.text_field :link, class: "form-control", :placeholder => "Enter the url" %>
               </div>
           </div>
-          <div class="col-md-3">
-              <div class="form-actions">
-                  <%= submit_tag "Quick Note!", class: "btn btn-danger col-md-6" %>
+          <% if ! @categories.empty? %>
+              <div class="col-md-2">
+                  <div class="form-group">
+                      <%= f.select :category_id, options_for_select(@categories.all.map {|category| [category.name, category.id]}), {}, { class: "form-control" } %>
+                  </div>
               </div>
-          </div>
+          <% else %>
+              <%= f.hidden_field :category_id, value: "0" %>
+          <% end %>
+          <% if @categories.empty? %>
+              <div class="col-md-3">
+                  <div class="form-actions">
+                      <%= f.submit "Quick Note!", class: "btn btn-danger col-md-6", data: { confirm: "You don't have any categories now. Do you want to add it to \"Unclassified\" ?" } %>
+                  </div>
+              </div>
+          <% else %>
+              <div class="col-md-3">
+                  <div class="form-actions">
+                      <%= f.submit "Quick Note!", class: "btn btn-danger col-md-6" %>
+                  </div>
+              </div>          
+          <% end %>
       <% end %>
   </div>
 <% end %>
