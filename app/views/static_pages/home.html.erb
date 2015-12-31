@@ -1,3 +1,4 @@
+<script>$('body').addClass('home-page');</script>
 <div class="center jumbotron">
   <h1>Welcome to iNOTE</h1>
   <h2>
@@ -5,12 +6,12 @@
   </h2>
   <% if signed_in? %>
       <div class="row">
-          <%= link_to flashcard_user_path(current_user), class: "btn btn-lg btn-primary", id: "btn-flash" do %>
+          <%= link_to flashcard_user_path(current_user), class: "btn btn-lg btn-primary btn-homepage", id: "btn-flash" do %>
               <span class="glyphicon glyphicon-flash"></span> Flash Now !
           <% end %>
       </div>
   <% else %>
-      <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary", id: "btn-signup" %>
+      <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary btn-homepage", id: "btn-signup" %>
   <% end %>
 </div>
 <% if signed_in? %>

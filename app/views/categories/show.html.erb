@@ -17,24 +17,42 @@
     <br>
     <h4>You don't have any notes for this category now!</h4>
   <% else %>
-    <% @notes.each do |note| %>
-      <div class="col-md-4">
-        <% if note.title.blank? %>
-          <h3><%= note.link_title %></h3>
-        <% else %>
-          <h3><%= note.title %></h3>
-        <% end %>
-        <% if note.description.blank? %>
-          <p><%= truncate(note.link_description, length: 50) %></p>
-        <% else %>
-          <p><%= truncate(note.description, length: 50) %></p>
-        <% end %>        
-        <p>
-          <%= link_to "Go!", note.link, target: "_blank", "title": "#{note.link_title}", "data-toggle": "popover", "data-trigger": "hover", "data-content": "<p>#{truncate(note.link_description, length: 100)}</p>" %>
-        </p>
-        <%= image_tag note.link_picture, alt: note.description, size: "250x250", class:"img-center" %>
+    <div id="notes" class="transitions-enabled">
+      <% @notes.each do |note| %>
+      <div class="box panel panel-default">
+        <div class="panel-heading note_image">
+          <%= image_tag note.link_picture, alt: note.description %>
+        </div>
+        <div class="panel-body">
+          <% if note.title.blank? %>
+            <h2><%= note.link_title %></h2>
+          <% else %>
+            <h2><%= note.title %></h2>
+          <% end %>
+          <% if note.description.blank? %>
+            <p><%= truncate(note.link_description, length: 70) %></p>
+          <% else %>
+            <p><%= truncate(note.description, length: 70) %></p>
+          <% end %>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-8">
+              <h5><%= time_ago_in_words(note.updated_at) %> ago</h5>
+            </div>
+            <div class="col-md-4">
+              <div class="btn-group pull-right">
+                <%= link_to note.link, target: "_blank", "title": "#{note.link_title}", "data-toggle": "popover", "data-trigger": "hover", 
+                    "data-content": "<p>#{truncate(note.link_description, length: 100)},</p>", class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-arrow-right"></span>
+                <% end %>
+              </div> 
+            </div>
+          </div>
+        </div>
       </div>
-    <% end %>   
+      <% end %> 
+    </div>
   <% end %>
   <div class="row">
     <div>

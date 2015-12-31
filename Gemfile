@@ -29,6 +29,8 @@ gem "devise"
 
 gem 'link_thumbnailer'
 
+gem 'masonry-rails', '~> 0.2.1'
+
 gem 'video_info', github: 'thibaudgg/video_info'
 
 # Use ActiveModel has_secure_password

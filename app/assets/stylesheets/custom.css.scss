@@ -4,6 +4,16 @@ body {
   padding-top: 60px;
 }
 
+.home-page {
+  background-image: image-url("home_background.png");  
+}
+
+.jumbotron {
+  padding-top: 100px !important;
+  background-color:transparent !important;  
+}
+
+
 .center {
   text-align: center;
 }
@@ -33,7 +43,7 @@ body {
 
 span.glyphicon-flash {
   font-size: 1.4em;
-  color: #ff9900;
+  color: #FF9900;
 }
 
 span.glyphicon-flash-disable {
@@ -91,8 +101,9 @@ p {
 /*Specific items*/
 
 #btn-signup {
-  margin-top: 30px;  
+  margin-top: 30px; 
 }
+
 
 #btn-flash {
   margin-top: 30px; 
@@ -101,6 +112,11 @@ p {
 
 #btn-add {
   margin-top: 30px;  
+}
+
+.btn-homepage {
+  border-radius: 10px !important;
+  
 }
 
 /* image */
@@ -153,4 +169,43 @@ tr.tr-go {
 .link-disable {
   pointer-events: none;
   cursor: default;  
+}
+
+#notes {
+  .panel-heading {
+    padding: 0;
+  } 
+  .panel-footer {
+    h5 {
+        text-align: left;
+	}
+  }    
+  margin: 0 auto;
+  width: 100%;
+  .box {
+	  margin: 10px;
+	  width: 350px;
+	  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.22);
+	  border-radius: 7px;
+	  text-align: center;
+	  img {
+	  	max-width: 100%;
+	  	height: auto;
+	  }
+	  h2 {
+	  	font-size: 22px;
+	  	margin: 0;
+	  	padding: 25px 10px;
+	  	a {
+				color: #474747;
+	  	}
+	  }
+	  .user {
+	  	font-size: 12px;
+	  	border-top: 1px solid #EAEAEA;
+			padding: 15px;
+			margin: 0;
+	  }
+	  
+	}
 }
