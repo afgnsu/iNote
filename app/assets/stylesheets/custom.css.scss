@@ -42,8 +42,13 @@ body {
 /* typography */
 
 span.glyphicon-flash {
-  font-size: 1.4em;
-  color: #FF9900;
+  font-size: 1.6em;
+  color: #f8f906;
+}
+
+span.glyphicon-flash-mainpage {
+  font-size: 4em !important;
+  color: #f8f906;
 }
 
 span.glyphicon-flash-disable {
@@ -108,6 +113,8 @@ p {
 #btn-flash {
   margin-top: 30px; 
   font-size: 1.4em;
+  background-color: transparent;
+  border: 0;
 }
 
 #btn-add {
@@ -172,6 +179,20 @@ tr.tr-go {
 }
 
 #notes {
+  
+  position: relative;
+  
+  .label-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    transition: background-color 0.5s ease-in 0.1s;
+
+    &:hover {
+      background-color: #666666;
+    }
+  }
   .panel-heading {
     padding: 0;
   } 

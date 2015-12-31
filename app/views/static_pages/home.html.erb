@@ -7,7 +7,7 @@
   <% if signed_in? %>
       <div class="row">
           <%= link_to flashcard_user_path(current_user), class: "btn btn-lg btn-primary btn-homepage", id: "btn-flash" do %>
-              <span class="glyphicon glyphicon-flash"></span> Flash Now !
+              <span class="glyphicon glyphicon-flash glyphicon-flash-mainpage"></span>
           <% end %>
       </div>
   <% else %>
