@@ -1,4 +1,4 @@
-class Note < ActiveRecord::Base
+class Link < ActiveRecord::Base
   before_save :full_link
   before_save :add_link_information
   before_save :increase_website_count

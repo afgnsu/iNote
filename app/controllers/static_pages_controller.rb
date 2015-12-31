@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     unless current_user.nil?
-      @note = Note.new
+      @link = Link.new
       @categories = current_user.categories
     end
   end

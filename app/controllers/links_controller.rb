@@ -1,15 +1,15 @@
-class NotesController < ApplicationController
+class LinksController < ApplicationController
   before_action :authenticate_user! 
   before_action :category_id_validation, only: [:quick_create]
   
   def new
     @category = Category.find(params[:category_id])
-    @note = @category.notes.build 
+    @link = @category.links.build 
   end  
 
   def create
     category = Category.find(params[:category_id])
-    if category.notes.create(note_params)
+    if category.links.create(link_params)
       redirect_to user_category_path(current_user, category)
     else
       render :new
@@ -18,13 +18,13 @@ class NotesController < ApplicationController
   
   def quick_create
     if current_user.id == params[:user_id].to_i
-      if params[:note][:category_id].to_i > 0 # add to one of current categories 
-        old_category = current_user.categories.find(params[:note][:category_id])  
+      if params[:link][:category_id].to_i > 0 # add to one of current categories 
+        old_category = current_user.categories.find(params[:link][:category_id])  
         if old_category.nil? # not the current user's category
-          flash[:danger] = "You cannot add note for others!"      
+          flash[:danger] = "You cannot add link for others!"      
           redirect_to root_path          
         else
-          old_category.notes.create(note_params)    
+          old_category.links.create(link_params)    
         end
       else # want to add to "Unclassified"
         unclassified_category = current_user.categories.find_by(name: "Unclassified") 
@@ -32,26 +32,26 @@ class NotesController < ApplicationController
           unclassified_category = current_user.categories.create(name: "Unclassified", private: true)
         end
         
-        unclassified_category.notes.create(note_params)
+        unclassified_category.links.create(link_params)
       end
       
-      flash[:success] = "Noted!" 
+      flash[:success] = "linked!" 
       redirect_to root_path
       
     else
-      flash[:danger] = "You cannot add note for others!"      
+      flash[:danger] = "You cannot add link for others!"      
       redirect_to root_path
     end
   end
   
   private
-    def note_params
-      params.require(:note).permit(:title, :description, :link)
+    def link_params
+      params.require(:link).permit(:title, :description, :link)
     end
     
     def category_id_validation
-      if is_numeric(params[:note][:category_id]) == true   
-        if params[:note][:category_id].to_i < 0
+      if is_numeric(params[:link][:category_id]) == true   
+        if params[:link][:category_id].to_i < 0
           flash[:danger] = "Wrong operation!"
           redirect_to root_path          
         end

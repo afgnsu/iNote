@@ -20,11 +20,11 @@ class CategoriesController < ApplicationController
     case session[:sort]
     when "oldest"
       @category = Category.find(params[:id])
-      @notes = @category.notes.order('updated_at ASC').all
+      @links = @category.links.order('updated_at ASC').all
       @sort_now = "oldest"
     else #newest
       @category = Category.find(params[:id])
-      @notes = @category.notes.order('updated_at DESC').all    
+      @links = @category.links.order('updated_at DESC').all    
       @sort_now = "newest"
     end
     
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
   
   def flashcard
     @category = Category.find(params[:id])
-    @note = @category.notes.order("RANDOM()").first
+    @link = @category.links.order("RANDOM()").first
   end
   
   private

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-3 col-md-offset-9">
     <div class="btn-group pull-right">  
-      <%= link_to "Add Note", new_user_category_note_path(current_user, @category), class: "btn btn-default" %>
+      <%= link_to "Add Link", new_user_category_link_path(current_user, @category), class: "btn btn-default" %>
       <div class="btn-group">  
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sorting
         <span class="caret"></span></button>
@@ -16,37 +16,37 @@
     </div>
   </div>
   <hr>
-  <% if @notes.empty? %>
+  <% if @links.empty? %>
     <br>
-    <h4>You don't have any notes for this category now!</h4>
+    <h4>You don't have any links for this category now!</h4>
   <% else %>
-    <div id="notes" class="transitions-enabled">
-      <% @notes.each do |note| %>
+    <div id="links" class="transitions-enabled">
+      <% @links.each do |link| %>
       <div class="box panel panel-default">
-        <div class="panel-heading note_image">
-          <%= image_tag note.link_picture, alt: note.description %>
+        <div class="panel-heading link_image">
+          <%= image_tag link.link_picture, alt: link.description %>
         </div>
         <div class="panel-body">
-          <% if note.title.blank? %>
-            <h2><%= note.link_title %></h2>
+          <% if link.title.blank? %>
+            <h2><%= link.link_title %></h2>
           <% else %>
-            <h2><%= note.title %></h2>
+            <h2><%= link.title %></h2>
           <% end %>
-          <% if note.description.blank? %>
-            <p><%= truncate(note.link_description, length: 70) %></p>
+          <% if link.description.blank? %>
+            <p><%= truncate(link.link_description, length: 70) %></p>
           <% else %>
-            <p><%= truncate(note.description, length: 70) %></p>
+            <p><%= truncate(link.description, length: 70) %></p>
           <% end %>
         </div>
         <div class="panel-footer">
           <div class="row">
             <div class="col-md-8">
-              <h5><%= time_ago_in_words(note.updated_at) %> ago</h5>
+              <h5><%= time_ago_in_words(link.updated_at) %> ago</h5>
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
-                <%= link_to note.link, target: "_blank", "title": "#{note.link_title}", "data-toggle": "popover", "data-trigger": "hover", 
-                    "data-content": "<p>#{truncate(note.link_description, length: 100)},</p>", class: "btn btn-default" do %>
+                <%= link_to link.link, target: "_blank", "title": "#{link.link_title}", "data-toggle": "popover", "data-trigger": "hover", 
+                    "data-content": "<p>#{truncate(link.link_description, length: 100)},</p>", class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-arrow-right"></span>
                 <% end %>
               </div> 

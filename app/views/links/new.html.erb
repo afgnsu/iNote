@@ -1,7 +1,7 @@
-<h2>Add new note</h2>
+<h2>Add new link</h2>
 
 <div class="col-md-6 col-md-offset-3">
-  <%= form_for [current_user, @category, @note] do |f| %>
+  <%= form_for [current_user, @category, @link] do |f| %>
     <div class="form-group">
       <%= f.text_field :title, class: "form-control", :placeholder => "Enter the title" %>
     </div>

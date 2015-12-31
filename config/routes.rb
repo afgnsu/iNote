@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :users do
     resources :categories do
-      resources :notes  
+      resources :links  
     end
   end
   
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   
   resources :websites
   
-  post '/users/:user_id/notes/quick_create' => 'notes#quick_create', as: :user_quick_creat_note
+  post '/users/:user_id/links/quick_create' => 'links#quick_create', as: :user_quick_creat_link
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

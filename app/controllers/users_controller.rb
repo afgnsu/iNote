@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
   
   def flashcard
-    @note = Note.where(category_id: Category.where(user_id: params[:id])).order("RANDOM()").first
+    @link = Link.where(category_id: Category.where(user_id: params[:id])).order("RANDOM()").first
   end
 
 end

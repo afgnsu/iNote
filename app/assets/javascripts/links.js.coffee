@@ -4,7 +4,7 @@
 
 
 $ ->
-  $('#notes').imagesLoaded ->
-    $('#notes').masonry
+  $('#links').imagesLoaded ->
+    $('#links').masonry
       itemSelector: '.box'
       isFitWidth: true

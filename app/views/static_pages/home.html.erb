@@ -16,7 +16,7 @@
 </div>
 <% if signed_in? %>
   <div class="row">
-      <%= form_for @note, url:  user_quick_creat_note_path(current_user) do |f| %>
+      <%= form_for @link, url:  user_quick_creat_link_path(current_user) do |f| %>
           <div class="col-md-6 col-md-offset-1">
               <div class="form-group">
                   <%= f.text_field :link, class: "form-control", :placeholder => "Enter the url" %>

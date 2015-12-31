@@ -9,7 +9,7 @@
         <% @categories.each do |category| %>
           <%= link_to user_category_path(current_user,category) do %>
             <li class="list-group-item">
-              <span class="badge"><%= category.notes_count %></span>
+              <span class="badge"><%= category.links_count %></span>
               <% if category.private %>
                 <span class="glyphicon glyphicon-lock"></span>
               <% end %> 
@@ -23,7 +23,7 @@
         <ul class="list-group">
             <% @categories.each do |category| %>
               <li class="list-group-item list-flash no-padding-left">
-                <% if category.notes_count == 0 %>
+                <% if category.links_count == 0 %>
                   <span class="glyphicon glyphicon-flash glyphicon-flash-disable"></span>  
                 <% else %>
                   <%= link_to flashcard_user_category_path(current_user, category) do %>

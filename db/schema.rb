@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229063631) do
+ActiveRecord::Schema.define(version: 20151231101152) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20151229063631) do
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
     t.boolean  "private",     default: false, null: false
-    t.integer  "notes_count", default: 0,     null: false
+    t.integer  "links_count", default: 0,     null: false
   end
 
   add_index "categories", ["user_id"], name: "index_categories_on_user_id"
 
-  create_table "notes", force: :cascade do |t|
+  create_table "links", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "link"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20151229063631) do
     t.string   "link_title"
   end
 
-  add_index "notes", ["category_id"], name: "index_notes_on_category_id"
+  add_index "links", ["category_id"], name: "index_links_on_category_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
