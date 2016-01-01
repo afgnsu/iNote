@@ -34,13 +34,13 @@
           <% if @categories.empty? %>
               <div class="col-md-3">
                   <div class="form-actions">
-                      <%= f.submit "Quick Note!", class: "btn btn-danger col-md-6", data: { confirm: "You don't have any categories now. Do you want to add it to \"Unclassified\" ?" } %>
+                      <%= f.submit "Quick Note!", class: "btn btn-danger btn-quicknote col-md-6", data: { confirm: "You don't have any categories now. Do you want to add it to \"Unclassified\" ?" } %>
                   </div>
               </div>
           <% else %>
               <div class="col-md-3">
                   <div class="form-actions">
-                      <%= f.submit "Quick Note!", class: "btn btn-danger col-md-6" %>
+                      <%= f.submit "Quick Note!", class: "btn btn-danger btn-quicknote col-md-6" %>
                   </div>
               </div>          
           <% end %>

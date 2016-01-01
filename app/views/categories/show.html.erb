@@ -28,9 +28,9 @@
         </div>
         <div class="panel-body">
           <% if link.title.blank? %>
-            <h2><%= link.link_title %></h2>
+            <h2 class="link-title"><%= link.link_title %></h2>
           <% else %>
-            <h2><%= link.title %></h2>
+            <h2 class="link-title"><%= link.title %></h2>
           <% end %>
           <% if link.description.blank? %>
             <p><%= truncate(link.link_description, length: 70) %></p>

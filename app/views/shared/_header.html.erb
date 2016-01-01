@@ -9,7 +9,7 @@
       <%= link_to "iNOTE", root_path, id: "logo", class: "navbar-brand" %>
     </div>
     <div class="collapse navbar-collapse" id="headerOptions">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right navbar-header">
         <% if !current_user %>
           <li><%= link_to "Sign up", new_user_registration_path %> </li>
           <li><%= link_to "Sign in", new_user_session_path %></li>
