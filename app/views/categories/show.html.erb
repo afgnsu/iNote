@@ -53,7 +53,9 @@
             </div>
           </div>
         </div>
-        <a href="#"><span class="label label-default label-close">x</span></a>
+        <%= link_to user_category_link_path(current_user,@category,link), method: :delete, data: {confirm: "Are you sure?"} do %>
+          <span class="label label-default label-close">x</span> 
+        <% end %>
       </div>
       <% end %> 
     </div>

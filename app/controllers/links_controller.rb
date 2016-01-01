@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   before_action :authenticate_user! 
   before_action :category_id_validation, only: [:quick_create]
+  before_action :require_current_user, only: [:destroy]
   
   def new
     @category = Category.find(params[:category_id])
@@ -15,6 +16,19 @@ class LinksController < ApplicationController
       render :new
     end
   end 
+  
+  def destroy
+    category = Category.find(params[:category_id])
+    link = Link.find(params[:id])
+    if link.category == category
+      flash[:success] = "Link deleted!"
+      link.destroy
+      redirect_to :back
+    else
+      flash[:danger] = "This link does not belong to this category."
+      redirect_to :back
+    end
+  end
   
   def quick_create
     if current_user.id == params[:user_id].to_i
@@ -60,5 +74,12 @@ class LinksController < ApplicationController
         redirect_to root_path
       end
     end
+
+    def require_current_user
+      if current_user != User.find(params[:user_id])
+        flash[:danger] = "You are not the right user to do so."
+        redirect_to root_path
+      end
+    end      
 
 end

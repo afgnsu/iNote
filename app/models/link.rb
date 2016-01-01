@@ -1,8 +1,9 @@
 class Link < ActiveRecord::Base
   before_save :full_link
   before_save :add_link_information
-  before_save :increase_website_count
+  before_save :add_website
   belongs_to :category, :counter_cache => true
+  belongs_to :website, :counter_cache => true
   
   private
   
@@ -23,14 +24,16 @@ class Link < ActiveRecord::Base
     end
   end
   
-  def increase_website_count
+  def add_website
     uri = URI(link)
     website = Website.find_by(host: uri.host)
     if website.nil?
       object = LinkThumbnailer.generate("#{uri.scheme}://#{uri.host}")  
-      Website.create(host: uri.host, scheme: uri.scheme, title: object.title, count: 1)
+      website = Website.create(host: uri.host, scheme: uri.scheme, title: object.title)
+      #website = Website.create(host: uri.host, scheme: uri.scheme, title: object.title, count: 1)
+      self.website = website
     else
-      Website.increment_counter(:count, website.id)
+      self.website = website
     end
   end
 end
