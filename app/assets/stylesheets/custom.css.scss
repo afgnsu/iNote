@@ -225,7 +225,7 @@ tr.tr-go {
 	  text-align: center;
 	  img {
 	  	max-width: 100%;
-	  	height: auto;
+	  	max-height: 350px;
 	  }
 	  h2 {
 	  	font-size: 22px;
@@ -249,3 +249,13 @@ tr.tr-go {
 .pagination-show-page ul {
   margin: 0 0 !important;
 }
+
+.pagination-show-page ul li a {
+  color: #000000 !important;
+}
+
+.active-pagination a {
+  background-color: #ccc !important;
+  border-color: #ccc !important;
+}
+

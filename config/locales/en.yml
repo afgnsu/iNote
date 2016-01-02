@@ -28,3 +28,9 @@ en:
       previous: "Prev"
       next: "Next"
       truncate: "&hellip;"
+    pagination:
+      first: "<<"
+      last: ">>"
+      previous: "<"
+      next: ">"
+      truncate: "&hellip;"      
