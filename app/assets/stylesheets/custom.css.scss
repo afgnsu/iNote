@@ -18,7 +18,6 @@ body {
   transition: color 0.3s ease-in 0s;  
 }
 
-
 .center {
   text-align: center;
 }
@@ -244,4 +243,9 @@ tr.tr-go {
 	  }
 	  
 	}
+}
+
+/* pagination */
+.pagination-show-page ul {
+  margin: 0 0 !important;
 }

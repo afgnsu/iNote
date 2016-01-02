@@ -1,21 +1,24 @@
 <div class="container">
   <h2><%= @category.name %></h2>
-  <div class="row">
-    <div class="col-md-3 col-md-offset-9">
-    <div class="btn-group pull-right">  
-      <%= link_to "Add Link", new_user_category_link_path(current_user, @category), class: "btn btn-default" %>
-      <div class="btn-group">  
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sorting
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li class=<%= li_active(@sort_now,"newest") %> ><%= link_to "From Newest", user_category_path(current_user,@category, sort: "newest"), class: link_sort_active(@sort_now,"newest") %></li>
-          <li class=<%= li_active(@sort_now,"oldest") %> ><%= link_to "From Oldest", user_category_path(current_user,@category, sort: "oldest"), class: link_sort_active(@sort_now,"oldest") %></li>
-        </ul>
+    <hr>
+    <div class="col-md-9 pagination-show-page">
+      <%= paginate @links %>  
+    </div>
+    <div class="col-md-3">
+      <div class="btn-group pull-right">  
+        <%= link_to "Add Link", new_user_category_link_path(current_user, @category), class: "btn btn-default" %>
+        <div class="btn-group">  
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sorting
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li class=<%= li_active(@sort_now,"newest") %> ><%= link_to "From Newest", user_category_path(current_user,@category, sort: "newest"), class: link_sort_active(@sort_now,"newest") %></li>
+            <li class=<%= li_active(@sort_now,"oldest") %> ><%= link_to "From Oldest", user_category_path(current_user,@category, sort: "oldest"), class: link_sort_active(@sort_now,"oldest") %></li>
+          </ul>
+        </div>
       </div>
     </div>
-    </div>
-  </div>
-  <hr>
+  <br>
+  <br>
   <% if @links.empty? %>
     <br>
     <h4>You don't have any links for this category now!</h4>
@@ -47,7 +50,7 @@
               <div class="btn-group pull-right">
                 <%= link_to link.link, target: "_blank", "title": "#{link.link_title}", "data-toggle": "popover", "data-trigger": "hover", 
                     "data-content": "<p>#{truncate(link.link_description, length: 100)},</p>", class: "btn btn-default" do %>
-                  <span class="glyphicon glyphicon-arrow-right"></span>
+                  <span class="glyphicon glyphicon-play"></span>
                 <% end %>
               </div> 
             </div>
