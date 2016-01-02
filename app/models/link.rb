@@ -4,6 +4,7 @@ class Link < ActiveRecord::Base
   before_save :add_website
   belongs_to :category, :counter_cache => true
   belongs_to :website, :counter_cache => true
+  has_many :link_reviews, :dependent => :destroy
   
   private
   
