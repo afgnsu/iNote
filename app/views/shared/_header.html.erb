@@ -30,9 +30,50 @@
               </li>
             </ul>
           </li>
+          <% if ! current_page?(controller: 'static_pages', action: 'home') %>
+            <li>
+              <a class="create-quicknote"><span class="glyphicon glyphicon-pencil"></span></a>
+            </li>
+          <% end %>  
         <% end %>
       </ul>
-    </div>      
+    </div>
+    <% if ! current_page?(controller: 'static_pages', action: 'home') %>
+      <% if current_user %>
+        <div>
+          <div class="row header-quicknote" style="display: none">
+            <%= form_for new_link, url:  user_quick_creat_link_path(current_user) do |f| %>
+                <div class="col-md-6 col-md-offset-1">
+                    <div class="form-group">
+                        <%= f.text_field :link, class: "form-control", :placeholder => "Enter the url" %>
+                    </div>
+                </div>
+                <% if ! current_user.categories.empty? %>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <%= f.select :category_id, options_for_select(current_user.categories.all.map {|category| [category.name, category.id]}), {}, { class: "form-control" } %>
+                        </div>
+                    </div>
+                <% else %>
+                    <%= f.hidden_field :category_id, value: "0" %>
+                <% end %>
+                <% if current_user.categories.empty? %>
+                    <div class="col-md-3">
+                        <div class="form-actions">
+                            <%= f.submit "Quick Note!", class: "btn btn-danger btn-quicknote col-md-6", data: { confirm: "You don't have any categories now. Do you want to add it to \"Unclassified\" ?" } %>
+                        </div>
+                    </div>
+                <% else %>
+                    <div class="col-md-3">
+                        <div class="form-actions">
+                            <%= f.submit "Quick Note!", class: "btn btn-danger btn-quicknote col-md-6" %>
+                        </div>
+                    </div>          
+                <% end %>
+            <% end %>
+          </div> 
+        </div>  
+      <% end %>  
+    <% end %>  
   </div>
 </nav>
-

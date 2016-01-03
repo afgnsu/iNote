@@ -21,4 +21,8 @@ module ApplicationHelper
     true if Integer(input) rescue false
   end  
   
+  def new_link
+    @link = Link.new
+  end
+  
 end

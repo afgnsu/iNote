@@ -50,7 +50,7 @@ class LinksController < ApplicationController
       end
       
       flash[:success] = "linked!" 
-      redirect_to root_path
+      redirect_to :back
       
     else
       flash[:danger] = "You cannot add link for others!"      
