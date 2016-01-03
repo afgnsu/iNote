@@ -1,18 +1,25 @@
 <div class="col-md-6 col-md-offset-3">
-  <% if @link.title.blank? %>
-    <h3><%= @link.link_title %></h3>
-  <% else %>
-    <h3><%= @link.title %></h3>
-  <% end %>
-  <% if @link.description.blank? %>
-      <p><%= truncate(@link.link_description, length: 100) %></p>
-  <% else %>
-      <p><%= truncate(@link.description, length: 100) %></p>
-  <% end %>        
-  <p>
-    <%= link_to @link.link, target: "_blank", "data-toggle": "popover", "data-trigger": "hover", "data-content": "Have a look!" do %>
-      <span class="glyphicon glyphicon-eye-open"></span>
-    <% end %>
-  </p> 
-  <%= image_tag @link.link_picture, alt: truncate(@link.description, length: 25), class: "img-thumbnail img-center" %>
+  <div class="panel panel-default">
+    <div class="panel-heading link_image">
+      <h2><%= @link.link_title %></h2>
+    </div>
+    <div class="panel-body">
+      <%= image_tag @link.link_picture, alt: @link.description %>
+      <p class="description"><%= @link.link_description %> ...</p>
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-md-8">
+          <h5><%= time_ago_in_words(@link.updated_at) %> ago</h5>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group pull-right">
+            <%= link_to @link.link, target: "_blank", class: "btn btn-default" do %>
+              <span class="glyphicon glyphicon-play"></span>
+            <% end %>
+          </div> 
+        </div>
+      </div>
+    </div>      
+  </div>
 </div>

@@ -30,6 +30,10 @@ class LinksController < ApplicationController
     end
   end
   
+  def show
+    @link = Link.find(params[:id])  
+  end
+  
   def quick_create
     if current_user.id == params[:user_id].to_i
       if params[:link][:category_id].to_i > 0 # add to one of current categories 

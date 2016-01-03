@@ -245,6 +245,52 @@ tr.tr-go {
 	}
 }
 
+#link_show {
+  margin-top: 20px;
+	.panel-heading {
+		h2 {
+		  letter-spacing: 1px;
+			text-align: left;
+			margin: 5px;
+		}	 
+	}
+	.link_show_left {
+	  padding-right: 30px !important;
+	}
+	
+	.link_image {
+		img {
+	  	max-width: 100%;
+	  	max-height: 350px;
+			display: block;
+			margin: 0 auto;
+		}
+	}
+	.panel-body {
+		padding: 35px;
+		img {
+		  float: left;
+	  	max-width: 100%;
+	  	max-height: 350px;
+			display: block;
+			margin: 0 20px 15px 0;		  
+		}
+		.description {
+			color: #868686;
+			line-height: 1.75;
+			letter-spacing: 1px;
+		}
+	}
+	.panel-footer {
+		p {
+			margin: 0;
+		}
+		.user {
+			padding-top: 8px;
+		}
+	}
+}
+
 /* pagination */
 .pagination-show-page ul {
   margin: 0 0 !important;

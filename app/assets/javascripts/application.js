@@ -23,7 +23,9 @@ $(document).ready(function(){
     });   
     $(".navbar-fixed-top").mouseleave(function() {
       $(".header-quicknote").slideUp();
-    });    
+    });   
+
+    $('.reviews').css('height',$(window).height() * 0.75);    
     
 });
 

@@ -48,6 +48,9 @@
             </div>
             <div class="col-md-4">
               <div class="btn-group pull-right">
+                <%= link_to user_category_link_path(current_user,@category,link), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-option-horizontal"></span>
+                <% end %>
                 <%= link_to link.link, target: "_blank", "title": "#{link.link_title}", "data-toggle": "popover", "data-trigger": "hover", 
                     "data-content": "<p>#{truncate(link.link_description, length: 100)},</p>", class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-play"></span>
