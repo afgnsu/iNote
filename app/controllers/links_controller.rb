@@ -33,7 +33,7 @@ class LinksController < ApplicationController
   def show
     @link = Link.find(params[:id]) 
     @review = @link.link_reviews.build
-    @current_reviews = @link.link_reviews.all
+    @current_reviews = @link.link_reviews.order('created_at DESC').all
   end
   
   def quick_create

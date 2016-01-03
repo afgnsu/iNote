@@ -20,11 +20,11 @@ class CategoriesController < ApplicationController
     case session[:sort]
     when "oldest"
       @category = Category.find(params[:id])
-      @links = @category.links.page(params[:page]).per(3).order('updated_at ASC')
+      @links = @category.links.page(params[:page]).per(9).order('updated_at ASC')
       @sort_now = "oldest"
     else #newest
       @category = Category.find(params[:id])
-      @links = @category.links.page(params[:page]).per(3).order('updated_at DESC')   
+      @links = @category.links.page(params[:page]).per(9).order('updated_at DESC')   
       @sort_now = "newest"
     end
     
