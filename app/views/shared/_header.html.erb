@@ -38,7 +38,7 @@
         <% end %>
       </ul>
     </div>
-    <% if ! current_page?(controller: 'static_pages', action: 'home') %>
+    <% if ! current_page?(root_path) %>
       <% if current_user %>
         <div>
           <div class="row header-quicknote" style="display: none">
