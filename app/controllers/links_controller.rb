@@ -31,7 +31,9 @@ class LinksController < ApplicationController
   end
   
   def show
-    @link = Link.find(params[:id])  
+    @link = Link.find(params[:id]) 
+    @review = @link.link_reviews.build
+    @current_reviews = @link.link_reviews.all
   end
   
   def quick_create

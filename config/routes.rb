@@ -26,6 +26,13 @@ Rails.application.routes.draw do
       end
   end    
   
+  resources :users do
+    resources :links do
+      resources :link_reviews 
+    end
+  end  
+  
+  resources :link_reviews 
   resources :websites
   
   post '/users/:user_id/links/quick_create' => 'links#quick_create', as: :user_quick_creat_link

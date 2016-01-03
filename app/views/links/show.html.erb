@@ -15,8 +15,8 @@
           </div>
           <div class="col-md-4">
             <div class="btn-group pull-right">
-              <%= link_to "#", class: "btn btn-default" do %>
-                <span class="glyphicon glyphicon-pencil"></span>
+              <%= link_to "#", class: "btn btn-default", data: {toggle: "modal", target: "#createReview"} do %>
+                <span class="glyphicon glyphicon-comment"></span>
               <% end %>                   
               <%= link_to @link.link, target: "_blank", class: "btn btn-default" do %>
                 <span class="glyphicon glyphicon-play"></span>
@@ -29,7 +29,33 @@
   </div>
   <div class="col-md-5">
     <h2>Reviews</h2>
-    <div class="reviews" style="overflow-x: auto; height: 500px">
+    <div class="reviews" style="overflow-x: auto">
+      <% @current_reviews.each do |review| %>
+        <p><%= review.content %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createReview" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create new review</h4>
+      </div>
+      <%= form_for [current_user, @link, @review] do |f| %>      
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control", rows: "5" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-actions">
+            <%= f.submit "Save", class: "btn btn-default" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
