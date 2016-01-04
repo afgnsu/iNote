@@ -1,5 +1,10 @@
 /* Main */
 
+@font-face {
+  font-family: 'Decker';
+  src: url('http://www.fontsaddict.com/fontface/decker.ttf');
+}
+
 body {
   padding-top: 60px;
   font-family: Decker, 微軟正黑體 !important;
@@ -7,6 +12,8 @@ body {
 
 .home-page {
   background-image: image-url("home_background.png");  
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .jumbotron {
@@ -307,5 +314,15 @@ tr.tr-go {
 .active-pagination a {
   background-color: #ccc !important;
   border-color: #ccc !important;
+}
+
+/* review */
+.each-review {
+  padding: 10px 10px 5px 10px;
+}
+
+.reviews {
+  width: 100%;
+  margin-top: 20px;
 }
 

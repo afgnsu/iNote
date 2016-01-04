@@ -25,7 +25,7 @@ $(document).ready(function(){
       $(".header-quicknote").slideUp();
     });   
 
-    $('.reviews').css('height',$(window).height() * 0.75);    
+    $('.reviews').css('height',$(window).height() * 0.50);    
     
 });
 
