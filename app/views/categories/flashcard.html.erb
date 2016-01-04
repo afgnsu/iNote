@@ -1,10 +1,9 @@
-<div class="row" id="link_show">
-  <%= render "shared/flashcard_content" %>
-  <div class="col-md-3">
-    <div>
-      <%= link_to flashcard_user_category_path(current_user, @category), class: "btn btn-lg btn-primary col-md-8 col-md-offset-2", id: "btn-add" do %>
-        <span class="glyphicon glyphicon-flash"></span> Flash! 
-      <% end %>
-    </div>    
-  </div>
-</div>  
+<%= render "shared/link_content" %>
+
+<div class="col-md-3">
+  <div>
+    <%= link_to flashcard_user_category_path(current_user, @category), class: "btn btn-lg btn-primary col-md-8 col-md-offset-2", id: "btn-add" do %>
+      <span class="glyphicon glyphicon-flash"></span> Flash! 
+    <% end %>
+  </div>    
+</div>
