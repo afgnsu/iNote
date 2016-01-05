@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_filter :allow_iframe_requests, only: [:flashcard]
   
   def new
     @category = current_user.categories.build
@@ -44,4 +45,5 @@ class CategoriesController < ApplicationController
     def category_params 
       params.require(:category).permit(:name, :private)
     end
+
 end

@@ -25,4 +25,16 @@ module ApplicationHelper
     @link = Link.new
   end
   
+  def youtube?(link)
+    if link.include? "https://www.youtube.com/watch"
+      true
+    else
+      false
+    end
+  end
+  
+  def embed_youtube(link)
+    link.gsub 'https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/'
+  end
+  
 end

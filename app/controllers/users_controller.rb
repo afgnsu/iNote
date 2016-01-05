@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!  
+  before_action :allow_iframe_requests, only: [:flashcard]
   
   def show
     @categories = current_user.categories.all
@@ -11,5 +12,4 @@ class UsersController < ApplicationController
     @current_reviews = @link.link_reviews.order('created_at DESC').all
     @total_review = @link.link_reviews.count
   end
-
 end

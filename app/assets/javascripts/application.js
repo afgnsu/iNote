@@ -25,7 +25,18 @@ $(document).ready(function(){
       $(".header-quicknote").slideUp();
     });   
 
-    $('.reviews').css('height',$(window).height() * 0.50);    
+    $('.reviews').css('height',$(window).height() * 0.50);
+    
+    $("#addYoutubeSrc").click(function(e) {
+        e.preventDefault();
+        $("#youtubeFrame").attr("src", $(".embed_youtube_link").data('content'));
+    })    
+
+    $("#deleteYoutubeSrc").click(function(e) {
+        e.preventDefault();
+        $("#youtubeFrame").attr("src", "");
+    })     
+
     
 });
 

@@ -4,12 +4,16 @@ class ApplicationController < ActionController::Base
   
   include ApplicationHelper
   
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end 
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation) }
   end  
   
-  
+ 
   
 end

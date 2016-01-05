@@ -2,6 +2,7 @@ class LinksController < ApplicationController
   before_action :authenticate_user! 
   before_action :category_id_validation, only: [:quick_create]
   before_action :require_current_user, only: [:destroy]
+  before_action :allow_iframe_requests, only: [:show]
   
   def new
     @category = Category.find(params[:category_id])
