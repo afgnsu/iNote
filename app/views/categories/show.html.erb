@@ -1,10 +1,10 @@
 <div class="container">
   <h2><%= @category.name %></h2>
     <hr>
-    <div class="col-md-9 pagination-show-page">
+    <div class="col-md-8 pagination-show-page">
       <%= paginate @links %>  
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="btn-group pull-right">  
         <%= link_to "Add Link", new_user_category_link_path(current_user, @category), class: "btn btn-default" %>
         <div class="btn-group">  

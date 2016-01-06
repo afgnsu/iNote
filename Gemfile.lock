@@ -114,6 +114,8 @@ GEM
       nokogiri (~> 1.6)
       rake (>= 0.9)
       video_info (~> 2.4)
+    longurl (0.1.6)
+      json
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -225,6 +227,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   link_thumbnailer
+  longurl
   masonry-rails (~> 0.2.1)
   pry
   rails (= 4.2.4)

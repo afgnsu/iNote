@@ -5,6 +5,8 @@ class Link < ActiveRecord::Base
   belongs_to :category, :counter_cache => true
   belongs_to :website, :counter_cache => true
   has_many :link_reviews, :dependent => :destroy
+
+  @@shorten_services = %w("bit.do" "goo.gl" "bitly.com" "tinyurl.com" "bit.ly") 
   
   def self.search(input)
     where( "link_title LIKE ? or link_description LIKE ?", "%#{input}%", "%#{input}%")
@@ -16,7 +18,15 @@ class Link < ActiveRecord::Base
     if link.exclude? "http://" and link.exclude? "https://" 
       self.link = "http://#{link}"
     end
-      self.link = URI::encode(self.link)
+    
+    # for shorten URL
+    uri = URI(self.link)
+    if @@shorten_services.any?{ |s| s[uri.host] }
+      self.link = LongURL.expand(self.link)
+    end
+    
+    self.link = URI::encode(self.link)
+  
   end
   
   def add_link_information
