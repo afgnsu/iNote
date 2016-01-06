@@ -25,6 +25,9 @@ class Link < ActiveRecord::Base
       self.link_title = object.title
       self.link_description = object.description
       if object.images.length != 0 
+        if object.images.first.src.to_s.include?("www.flickr.com")
+          object = LinkThumbnailer.generate(object.images.first.src.to_s) 
+        end
         self.link_picture = object.images.first.src.to_s
       end
     end
