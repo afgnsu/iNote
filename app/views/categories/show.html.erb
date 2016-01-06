@@ -15,6 +15,17 @@
             <li class=<%= li_active(@sort_now,"oldest") %> ><%= link_to "From Oldest", user_category_path(current_user,@category, sort: "oldest"), class: link_sort_active(@sort_now,"oldest") %></li>
           </ul>
         </div>
+        <div class="btn-group">  
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Go To
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% current_user.categories.each do |category| %>
+              <% if category.name != @category.name %>
+                <li><%= link_to category.name, user_category_path(current_user,category) %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>        
       </div>
     </div>
   <br>
