@@ -6,6 +6,10 @@ class Link < ActiveRecord::Base
   belongs_to :website, :counter_cache => true
   has_many :link_reviews, :dependent => :destroy
   
+  def self.search(input)
+    where( "link_title LIKE ? or link_description LIKE ?", "%#{input}%", "%#{input}%")
+  end  
+  
   private
   
   def full_link

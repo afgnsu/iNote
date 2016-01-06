@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :users do
       member do
         get :flashcard
+        get :search_link
       end
   end    
   

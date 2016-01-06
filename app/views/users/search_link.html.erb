@@ -1,0 +1,66 @@
+<div class="container">
+  <% if @all_results %>
+    <h2>Results for all links <small>&nbsp;&nbsp;<%= pluralize(@links_count, 'result') %></small></h2>
+  <% else %>
+    <h2>Search results for <b><%= @search_content %></b> <small>&nbsp;&nbsp;<%= pluralize(@links_count, 'result') %></small></h2>
+  <% end %>
+  <hr>
+  <div class="col-md-9 pagination-show-page">
+    <%= paginate @links %>
+  </div>
+  <br>
+  <br>
+  <% if @links.empty? %>
+    <br>
+    <h4>No links match!</h4>
+  <% else %>
+    <div id="links" class="transitions-enabled">
+      <% @links.each do |link| %>
+      <div class="box panel panel-default">
+        <div class="panel-heading link_image">
+          <%= image_tag link.link_picture, alt: link.description %>
+        </div>
+        <div class="panel-body">
+          <% if link.title.blank? %>
+            <h2 class="link-title"><%= link.link_title %></h2>
+          <% else %>
+            <h2 class="link-title"><%= link.title %></h2>
+          <% end %>
+          <% if link.description.blank? %>
+            <p><%= truncate(link.link_description, length: 70) %></p>
+          <% else %>
+            <p><%= truncate(link.description, length: 70) %></p>
+          <% end %>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-8">
+              <h5><%= time_ago_in_words(link.updated_at) %> ago</h5>
+            </div>
+            <div class="col-md-4">
+              <div class="btn-group pull-right">
+                <% if any_reviews? link %> 
+                  <%= link_to user_category_link_path(current_user,link.category,link), "title": "<h4>Latest review <small>#{time_ago_in_words(latest_review(link).created_at)}</small></h4>", "data-toggle": "popover", "data-trigger": "hover", 
+                        "data-content": "<p>#{latest_review(link).content}</p>", "data-placement": "auto", class: "btn btn-default" do %>
+                    <span class="glyphicon glyphicon-zoom-in"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_category_link_path(current_user,link.category,link), class: "btn btn-default" do %>
+                    <span class="glyphicon glyphicon-zoom-in"></span>
+                  <% end %>                
+                <% end %>
+                <%= link_to link.link, target: "_blank", class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-play"></span>
+                <% end %>                
+              </div> 
+            </div>
+          </div>
+        </div>
+        <%= link_to user_category_link_path(current_user,link.category,link), method: :delete, data: {confirm: "Are you sure?"} do %>
+          <span class="label label-default label-close">x</span> 
+        <% end %>
+      </div>
+      <% end %> 
+    </div>
+  <% end %>
+</div>

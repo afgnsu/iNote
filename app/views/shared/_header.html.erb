@@ -8,6 +8,17 @@
       </button>      
       <%= link_to "iNOTE", root_path, id: "logo", class: "navbar-brand" %>
     </div>
+    <% if current_user %>
+      <%= form_tag search_link_user_path(current_user), method: :get, class:"navbar-form navbar-left", role: "search_link" do %>
+        <div class="form-group">
+          <%= text_field_tag :search_content, nil, placeholder: "Search your links", class: "form-control" %> 
+        </div>
+        <%= button_tag(type: 'submit', class: "btn btn-default") do %>
+          <span class="glyphicon glyphicon-search"></span> 
+        <% end %>
+      <% end %>
+    <% end %>
+    
     <div class="collapse navbar-collapse" id="headerOptions">
       <ul class="nav navbar-nav navbar-right navbar-header">
         <% if !current_user %>

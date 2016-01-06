@@ -21,7 +21,7 @@
           <div class="col-md-4">
             <div class="btn-group pull-right">
               <% if youtube? @link.link %>
-                <%= link_to "#youtubeModal", "data-toggle": "modal", class: "btn btn-default", id: "addYoutubeSrc" do %>
+                <%= link_to "#youtubeModal", "data-toggle": "modal", class: "btn btn-default addYoutubeSrc" do %>
                   <span class="glyphicon glyphicon-film"></span>  
                 <% end %>
               <% end %>
@@ -70,7 +70,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" id="deleteYoutubeSrc" aria-hidden="true">&times;</button>
+          <button type="button" class="close deleteYoutubeSrc" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="youtubeModalLabel" style="letter-spacing: 1px">Youtube</h4>
         </div> 
         <div class="modal-body">
