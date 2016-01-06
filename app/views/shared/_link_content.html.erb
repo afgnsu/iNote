@@ -20,6 +20,9 @@
           </div>
           <div class="col-md-4">
             <div class="btn-group pull-right">
+              <%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{@link.link}", "title": "Share on Facebook", target: "popup", class: "btn btn-default", id: "shareFacebook" do %>
+                <span class="glyphicon glyphicon-share"></span>  
+              <% end %>
               <% if youtube? @link.link %>
                 <%= link_to "#youtubeModal", "data-toggle": "modal", class: "btn btn-default addYoutubeSrc" do %>
                   <span class="glyphicon glyphicon-film"></span>  

@@ -37,8 +37,12 @@ $(document).ready(function(){
         $("#youtubeFrame").attr("src", "");
     })  
   
-
+    $('#shareFacebook').click(function(e) { 
+        window.open($(this).attr('href'), "Share to Facebook", "width=800px, height=600px"); 
+        e.preventDefault();
+    }); 
     
+      
 });
 
 jQuery(function($) {
