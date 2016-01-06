@@ -16,6 +16,7 @@ class Link < ActiveRecord::Base
     if link.exclude? "http://" and link.exclude? "https://" 
       self.link = "http://#{link}"
     end
+      self.link = URI::encode(self.link)
   end
   
   def add_link_information
