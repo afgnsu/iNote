@@ -22,7 +22,9 @@ class LinksController < ApplicationController
     exist_link = Link.where(category_id: Category.where(user_id: current_user.id)).where(link: params[:link][:link]).first
     if exist_link.nil?
       category = Category.find(params[:category_id])
-      if category.links.create(link_params)
+      if new_link = category.links.create(link_params)
+        flash[:success] = "linked! <a href='#{user_category_link_path(current_user, category, new_link)}'>See it!</a>"
+
         redirect_to user_category_path(current_user, category)
       else
         render :new

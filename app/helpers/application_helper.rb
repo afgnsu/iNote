@@ -6,7 +6,7 @@ module ApplicationHelper
     close_button = content_tag :button, "×", close_button_options
     
     alerts = flash.map do |type, message|
-      alert_content = close_button + message
+      alert_content = close_button + sanitize(message)
   
       alert_type = alert_types[type.to_sym] || type
       alert_class = "alert alert-#{alert_type} alert-dismissable"
