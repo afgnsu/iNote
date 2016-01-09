@@ -16,7 +16,7 @@
 </div>
 <% if signed_in? %>
   <div class="row">
-      <%= form_for new_link, url:  user_quick_creat_link_path(current_user) do |f| %>
+      <%= form_for new_link, url:  user_links_path(current_user) do |f| %>
           <div class="col-md-6 col-md-offset-1">
               <div class="form-group">
                   <%= f.text_field :link, class: "form-control", :placeholder => "Enter the url" %>
@@ -25,11 +25,11 @@
           <% if ! current_user.categories.empty? %>
               <div class="col-md-2">
                   <div class="form-group">
-                      <%= f.select :category_id, options_for_select(current_user.categories.all.map {|category| [category.name, category.id]}), {}, { class: "form-control" } %>
+                      <%= select_tag "category_id", options_for_select(current_user.categories.all.map {|category| [category.name, category.id]}), { class: "form-control" } %>
                   </div>
               </div>
           <% else %>
-              <%= f.hidden_field :category_id, value: "0" %>
+              <%= hidden_field_tag "category_id", "0" %>
           <% end %>
           <% if current_user.categories.empty? %>
               <div class="col-md-3">

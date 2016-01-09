@@ -2,8 +2,8 @@ class LinkReviewsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    link = Link.find(params[:link_id])
-    if link.link_reviews.create(link_review_params)
+    user_link_relationship = UserLinkRelationship.where(user_id: current_user.id, link_id: params[:link_id]).first
+    if user_link_relationship.link_reviews.create(link_review_params)
       redirect_to :back
     else
       flash[:danger] = "Failed to add review!"

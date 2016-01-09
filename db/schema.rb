@@ -11,43 +11,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101170704) do
+ActiveRecord::Schema.define(version: 20160109005542) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "user_id"
     t.boolean  "private",     default: false, null: false
     t.integer  "links_count", default: 0,     null: false
+    t.integer  "users_count", default: 0,     null: false
   end
 
-  add_index "categories", ["user_id"], name: "index_categories_on_user_id"
+  create_table "category_link_relationships", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "link_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "category_link_relationships", ["category_id"], name: "index_category_link_relationships_on_category_id"
+  add_index "category_link_relationships", ["link_id"], name: "index_category_link_relationships_on_link_id"
 
   create_table "link_reviews", force: :cascade do |t|
     t.text     "content"
+    t.integer  "user_link_relationship_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "link_reviews", ["user_link_relationship_id"], name: "index_link_reviews_on_user_link_relationship_id"
+
+  create_table "links", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "link"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.text     "link_description"
+    t.text     "link_picture"
+    t.string   "link_title"
+    t.integer  "website_id"
+    t.integer  "users_count",      default: 0, null: false
+    t.integer  "categories_count", default: 0, null: false
+  end
+
+  add_index "links", ["website_id"], name: "index_links_on_website_id"
+
+  create_table "user_category_relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "user_category_relationships", ["category_id"], name: "index_user_category_relationships_on_category_id"
+  add_index "user_category_relationships", ["user_id"], name: "index_user_category_relationships_on_user_id"
+
+  create_table "user_link_relationships", force: :cascade do |t|
+    t.integer  "user_id"
     t.integer  "link_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "link_reviews", ["link_id"], name: "index_link_reviews_on_link_id"
-
-  create_table "links", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "link"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "category_id"
-    t.text     "link_description"
-    t.text     "link_picture"
-    t.string   "link_title"
-    t.integer  "website_id"
-  end
-
-  add_index "links", ["category_id"], name: "index_links_on_category_id"
-  add_index "links", ["website_id"], name: "index_links_on_website_id"
+  add_index "user_link_relationships", ["link_id"], name: "index_user_link_relationships_on_link_id"
+  add_index "user_link_relationships", ["user_id"], name: "index_user_link_relationships_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -63,6 +91,8 @@ ActiveRecord::Schema.define(version: 20160101170704) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.integer  "links_count",            default: 0,  null: false
+    t.integer  "categories_count",       default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

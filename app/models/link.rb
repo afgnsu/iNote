@@ -4,7 +4,11 @@ class Link < ActiveRecord::Base
   before_save :add_website
   belongs_to :category, :counter_cache => true
   belongs_to :website, :counter_cache => true
-  has_many :link_reviews, :dependent => :destroy
+  has_many :users, through: :user_link_relationships 
+  has_many :user_link_relationships, :dependent => :destroy
+  has_many :categories, through: :category_link_relationships 
+  has_many :category_link_relationships , :dependent => :destroy  
+  
 
   @@shorten_services = %w("bit.do" "goo.gl" "bitly.com" "tinyurl.com" "bit.ly") 
   
@@ -25,6 +29,7 @@ class Link < ActiveRecord::Base
       self.link = LongURL.expand(self.link)
     end
     
+    self.link = URI::unescape(self.link)
     self.link = URI::encode(self.link)
   
   end

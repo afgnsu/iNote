@@ -6,10 +6,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
+  
   resources :users do
-    resources :categories do
-      resources :links  
-    end
+    resources :links  
   end
   
   resources :users do
@@ -35,8 +34,6 @@ Rails.application.routes.draw do
   
   resources :link_reviews 
   resources :websites
-  
-  post '/users/:user_id/links/quick_create' => 'links#quick_create', as: :user_quick_creat_link
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-4">
       <div class="btn-group pull-right">  
-        <%= link_to "Add Link", new_user_category_link_path(current_user, @category), class: "btn btn-default" %>
+        <%= link_to "Add Link", new_user_link_path(current_user, :category_id => @category.id), class: "btn btn-default" %>
         <div class="btn-group">  
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sorting
           <span class="caret"></span></button>
@@ -60,12 +60,12 @@
             <div class="col-md-4">
               <div class="btn-group pull-right">
                 <% if any_reviews? link %> 
-                  <%= link_to user_category_link_path(current_user,@category,link), "title": "<h4>Latest review <small>#{time_ago_in_words(latest_review(link).created_at)}</small></h4>", "data-toggle": "popover", "data-trigger": "hover", 
+                  <%= link_to user_link_path(current_user,link), "title": "<h4>Latest review <small>#{time_ago_in_words(latest_review(link).created_at)}</small></h4>", "data-toggle": "popover", "data-trigger": "hover", 
                         "data-content": "<p>#{latest_review(link).content}</p>", "data-placement": "auto", class: "btn btn-default" do %>
                     <span class="glyphicon glyphicon-zoom-in"></span>
                   <% end %>
                 <% else %>
-                  <%= link_to user_category_link_path(current_user,@category,link), class: "btn btn-default" do %>
+                  <%= link_to user_link_path(current_user,link), class: "btn btn-default" do %>
                     <span class="glyphicon glyphicon-zoom-in"></span>
                   <% end %>                
                 <% end %>
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <%= link_to user_category_link_path(current_user,@category,link), method: :delete, data: {confirm: "Are you sure?"} do %>
+        <%= link_to user_link_path(current_user,link, "category_id": @category.id), method: :delete, data: {confirm: "Are you sure?"} do %>
           <span class="label label-default label-close">x</span> 
         <% end %>
       </div>

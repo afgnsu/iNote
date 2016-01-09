@@ -1,3 +1,3 @@
 class LinkReview < ActiveRecord::Base
-  belongs_to :link
+  belongs_to :user_link_relationship
 end
