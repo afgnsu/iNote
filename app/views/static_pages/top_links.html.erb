@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Top <%= @links.count %></h2>
+  <hr>
+  <br>
+  <br>
+  <% if @links.empty? %>
+    <br>
+    <h4>No ranking now</h4>
+  <% else %>
+    <div id="links" class="transitions-enabled">
+      <% @links.each do |link| %>
+      <% @rank = @rank + 1 %>
+      <div class="box panel panel-default">
+        <div class="panel-heading link_image">
+          <%= image_tag link.link_picture, alt: link.description %>
+        </div>
+        <div class="panel-body">
+          <% if link.title.blank? %>
+            <h2 class="link-title"><%= link.link_title %></h2>
+          <% else %>
+            <h2 class="link-title"><%= link.title %></h2>
+          <% end %>
+          <% if link.description.blank? %>
+            <p><%= truncate(link.link_description, length: 70) %></p>
+          <% else %>
+            <p><%= truncate(link.description, length: 70) %></p>
+          <% end %>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-8">
+              <h5>Noted by <%= link.users_count%> users</h5>
+            </div>
+            <div class="col-md-4">
+              <div class="btn-group pull-right">
+                <%= link_to link.link, target: "_blank", class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-play"></span>
+                <% end %>                
+              </div> 
+            </div>
+          </div>
+        </div>
+        <span class="glyphicon glyphicon-total-user glyphicon-star <%= top_link_count @rank %>"></span>
+      </div>
+      <% end %> 
+    </div>
+  <% end %>
+</div>

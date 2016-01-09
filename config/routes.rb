@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
+  get '/top_links' => 'static_pages#top_links'
   
   resources :users do
     resources :links  

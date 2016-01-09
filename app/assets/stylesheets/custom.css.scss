@@ -201,6 +201,13 @@ tr.tr-go {
 #links {
   
   position: relative;
+
+  .glyphicon-total-user {
+    font-size: 3em;
+    position: absolute;
+    top: -22px;
+    right: -20px;
+  } 
   
   .label-close {
     position: absolute;
@@ -331,3 +338,6 @@ tr.tr-go {
 .search_form {
   margin: 7px !important;
 }
+
+
+
