@@ -37,9 +37,10 @@ class CategoriesController < ApplicationController
   def flashcard
     @category = Category.find_by_id(params[:id])
     @link = @category.links.order("RANDOM()").first
-    @review = @link.link_reviews.build
-    @current_reviews = @link.link_reviews.order('created_at DESC').all
-    @total_review = @link.link_reviews.count    
+    user_link_relationship = UserLinkRelationship.find_by(user: current_user, link: @link)
+    @review = user_link_relationship.link_reviews.build
+    @current_reviews = user_link_relationship.link_reviews.order('created_at DESC').all
+    @total_review = user_link_relationship.link_reviews.count  
   end
   
   private

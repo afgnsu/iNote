@@ -4,14 +4,8 @@
   <h2>
       No time to review all the information you noted? Let us FLASH it for you!
   </h2>
-  <% if signed_in? %>
-      <div class="row">
-          <%= link_to flashcard_user_path(current_user), class: "btn btn-lg btn-primary btn-homepage", id: "btn-flash" do %>
-              <span class="glyphicon glyphicon-flash glyphicon-flash-mainpage"></span>
-          <% end %>
-      </div>
-  <% else %>
-      <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary btn-homepage", id: "btn-signup" %>
+  <% if ! signed_in? %>
+    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary btn-homepage", id: "btn-signup" %>
   <% end %>
 </div>
 <% if signed_in? %>
