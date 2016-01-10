@@ -201,6 +201,29 @@ tr.tr-go {
 
 #links {
   
+  .darken {
+    background: black;
+    position: relative;
+    color: #FFFFFF;
+    &:hover {
+      img {
+        opacity: 0.7;  
+      }
+      .user_count_show {
+        display: block;  
+      }
+    }
+    .user_count_show {
+      position: absolute;  
+      left: 0;
+      right: 0;
+      top: 50%;
+      display: none;
+    }
+    
+  }
+  
+  
   position: relative;
 
   .glyphicon-total-user {
@@ -245,6 +268,7 @@ tr.tr-go {
 	  img {
 	  	max-width: 100%;
 	  	max-height: 300px;
+	  	transition: all 0.3s linear;
 	  }
 	  h2 {
 	  	font-size: 22px;

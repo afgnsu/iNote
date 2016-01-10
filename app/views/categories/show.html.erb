@@ -37,8 +37,15 @@
     <div id="links" class="transitions-enabled">
       <% @links.each do |link| %>
       <div class="box panel panel-default">
-        <div class="panel-heading link_image">
-          <%= image_tag link.link_picture, alt: link.description %>
+        <div class="panel-heading link_image darken">
+          <%= link_to user_link_path(current_user,link) do %> 
+            <%= image_tag link.link_picture, alt: link.description %>
+          <% end %>
+          <div class="user_count_show">
+            <span class="glyphicon glyphicon-bookmark"></span> <%= link.users_count %>
+            &nbsp;&nbsp;
+            <span class="glyphicon glyphicon-comment"></span> <%= return_review_count link %>
+          </div>
         </div>
         <div class="panel-body">
           <% if link.title.blank? %>

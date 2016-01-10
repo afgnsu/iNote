@@ -21,6 +21,7 @@ $(document).ready(function(){
     $(".create-quicknote").hover(function() {
       $(".header-quicknote").slideDown();
     });   
+    
     $(".navbar-fixed-top").mouseleave(function() {
       $(".header-quicknote").slideUp();
     });   
