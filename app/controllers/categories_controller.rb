@@ -18,20 +18,25 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    
+    
     session[:sort] = params[:sort] if params[:sort] != nil   
     
     case session[:sort]
     when "oldest"
       @category = Category.find_by_id(params[:id])
-      @links = @category.links.page(params[:page]).per(9).order('updated_at ASC')
+      #@links = @category.links.page(params[:page]).per(9).order('updated_at ASC')
+      @links = Link.joins(:category_link_relationships).where("category_link_relationships.category_id = #{@category.id}").page(params[:page]).per(9).order("category_link_relationships.created_at ASC")
       @sort_now = "oldest"
     else #newest
       @category = Category.find_by_id(params[:id])
-      @links = @category.links.page(params[:page]).per(9).order('updated_at DESC')   
+      #@links = @category.links.page(params[:page]).per(9).order('updated_at DESC')   
+      @links = Link.joins(:category_link_relationships).where("category_link_relationships.category_id = #{@category.id}").page(params[:page]).per(9).order("category_link_relationships.created_at DESC")
       @sort_now = "newest"
     end
     
     session[:sort] = @sort_now
+    
   end
   
   def flashcard
