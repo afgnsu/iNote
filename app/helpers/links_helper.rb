@@ -20,5 +20,8 @@ module LinksHelper
     user_link_relationship.link_reviews_count
   end
   
+  def created_time_link_user(link, user)
+    UserLinkRelationship.find_by(user: user, link: link).created_at
+  end
   
 end

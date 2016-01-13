@@ -6,4 +6,8 @@ module CategoriesHelper
   def li_active(now_option, li_option)
     "active" if now_option == li_option
   end
+  
+  def created_time_link_category(link, category)
+    CategoryLinkRelationship.find_by(category: category, link: link).created_at
+  end
 end
