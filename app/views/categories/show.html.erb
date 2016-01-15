@@ -82,7 +82,7 @@
             </div>
           </div>
         </div>
-        <%= link_to((user_link_path(current_user,link,"category_id": @category.id)), method: :delete, data: {confirm: "Are you sure?"}) do %>
+        <%= link_to(user_link_path(current_user,link,{"category_id": @category.id}), method: :delete, data: {confirm: "Are you sure?"}) do %>
           <span class="label label-default label-close">x</span> 
         <% end %>
       </div>
