@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110151922) do
+ActiveRecord::Schema.define(version: 20160121025619) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160110151922) do
     t.boolean  "private",     default: false, null: false
     t.integer  "links_count", default: 0,     null: false
     t.integer  "users_count", default: 0,     null: false
+    t.boolean  "predefined"
   end
 
   create_table "category_link_relationships", force: :cascade do |t|
