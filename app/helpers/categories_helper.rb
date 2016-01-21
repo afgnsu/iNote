@@ -8,6 +8,7 @@ module CategoriesHelper
   end
   
   def created_time_link_category(link, category)
-    CategoryLinkRelationship.find_by(category: category, link: link).created_at
+    user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: category)
+    UserCategoryRelationshipLinkRelationship.find_by(user_category_relationship: user_category_relationship, link: link).created_at
   end
 end

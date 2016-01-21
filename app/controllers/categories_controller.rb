@@ -21,17 +21,16 @@ class CategoriesController < ApplicationController
     
     
     session[:sort] = params[:sort] if params[:sort] != nil   
-    
+    @category = Category.find_by_id(params[:id])
+    user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: @category)
     case session[:sort]
     when "oldest"
-      @category = Category.find_by_id(params[:id])
       #@links = @category.links.page(params[:page]).per(9).order('updated_at ASC')
-      @links = Link.joins(:category_link_relationships).where("category_link_relationships.category_id = #{@category.id}").page(params[:page]).per(9).order("category_link_relationships.created_at ASC")
+      @links = Link.joins(:user_category_relationship_link_relationships).where("user_category_relationship_link_relationships.user_category_relationship_id = #{user_category_relationship.id}").page(params[:page]).per(9).order("user_category_relationship_link_relationships.created_at ASC")
       @sort_now = "oldest"
     else #newest
-      @category = Category.find_by_id(params[:id])
       #@links = @category.links.page(params[:page]).per(9).order('updated_at DESC')   
-      @links = Link.joins(:category_link_relationships).where("category_link_relationships.category_id = #{@category.id}").page(params[:page]).per(9).order("category_link_relationships.created_at DESC")
+      @links = Link.joins(:user_category_relationship_link_relationships).where("user_category_relationship_link_relationships.user_category_relationship_id = #{user_category_relationship.id}").page(params[:page]).per(9).order("user_category_relationship_link_relationships.created_at DESC")
       @sort_now = "newest"
     end
     
@@ -41,7 +40,8 @@ class CategoriesController < ApplicationController
   
   def flashcard
     @category = Category.find_by_id(params[:id])
-    @link = @category.links.order("RANDOM()").first
+    user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: @category)
+    @link = user_category_relationship.links.order("RANDOM()").first
     user_link_relationship = UserLinkRelationship.find_by(user: current_user, link: @link)
     @review = user_link_relationship.link_reviews.build
     @current_reviews = user_link_relationship.link_reviews.order('created_at DESC').all

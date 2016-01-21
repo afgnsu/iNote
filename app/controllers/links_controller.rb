@@ -31,6 +31,7 @@ class LinksController < ApplicationController
         redirect_to root_path      
       end
     else
+      # right now this part is not used
       category = current_user.categories.find_by(name: "Unclassified")  
       if category.nil?
         category = current_user.categories.create(name: "Unclassified", private: true)
@@ -38,9 +39,12 @@ class LinksController < ApplicationController
     end
     
     exist_link_of_all = Link.find_by(link: params[:link][:link])
+    user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: category)
+    
     if exist_link_of_all.nil?
       if new_link = category.links.create(link_params)
         UserLinkRelationship.create(user: current_user, link: new_link)
+        user_category_relationship.links << new_link
         flash[:success] = "linked! <a href='#{user_link_path(current_user, new_link)}'>See it!</a>"
         redirect_to :back
       else
@@ -48,19 +52,28 @@ class LinksController < ApplicationController
         render :new
       end            
     else
-      exist_link_of_user_category = category.links.find_by(link: params[:link][:link])
-      if exist_link_of_user_category.nil?
-        exist_link_of_user_other_category = current_user.links.find_by(link: params[:link][:link])
-        if exist_link_of_user_other_category.nil? 
-          UserLinkRelationship.create(user: current_user, link: exist_link_of_all)
-        end
-        CategoryLinkRelationship.create(category: category, link: exist_link_of_all)
-        flash[:success] = "linked! <a href='#{user_link_path(current_user, exist_link_of_all)}'>See it!</a>"
-        redirect_to :back       
-      else
+      
+      exist_link_of_category = category.links.find_by(link: params[:link][:link])
+      exist_link_of_user = current_user.links.find_by(link: params[:link][:link])
+      
+      if user_category_relationship.links.where(id: exist_link_of_all.id).count > 0
         flash[:danger] = "You created this link in this category before!"
-        redirect_to user_link_path(current_user, exist_link_of_user_category)                 
+        redirect_to user_link_path(current_user, exist_link_of_all) and return 
+      else
+        user_category_relationship.links << exist_link_of_all
       end
+      
+      if exist_link_of_category.nil?
+        CategoryLinkRelationship.create(category: category, link: exist_link_of_all)
+      end
+
+      if exist_link_of_user.nil?
+        UserLinkRelationship.create(user: current_user, link: exist_link_of_all)
+      end 
+      
+      flash[:success] = "linked! <a href='#{user_link_path(current_user, exist_link_of_all)}'>See it!</a>"
+      redirect_to :back  
+      
     end
   end 
   
@@ -71,15 +84,23 @@ class LinksController < ApplicationController
       redirect_to root_path      
     end
 
+    
     link = current_user.links.find_by_id(params[:id])
     if ! link.nil? 
       flash[:success] = "Link deleted!"
-      CategoryLinkRelationship.where(category_id: category.id, link_id: link.id).first.destroy
-      exist_category_has_link = link.categories.joins(:users).merge(User.where(id: current_user.id)).first
-      if exist_category_has_link.nil?
+      
+      user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: category)
+      UserCategoryRelationshipLinkRelationship.find_by(user_category_relationship: user_category_relationship, link: link).destroy
+      
+      
+      if link.user_category_relationships.where(user_id: current_user.id).count == 0
         UserLinkRelationship.where(user: current_user, link: link).first.destroy
       end
       
+      if link.user_category_relationships.where(category_id: category.id).count == 0
+        CategoryLinkRelationship.where(category_id: category.id, link_id: link.id).first.destroy
+      end
+            
       link.reload
       if link.users_count == 0
         link.destroy

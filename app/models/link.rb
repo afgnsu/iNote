@@ -8,7 +8,8 @@ class Link < ActiveRecord::Base
   has_many :user_link_relationships, :dependent => :destroy
   has_many :categories, through: :category_link_relationships 
   has_many :category_link_relationships , :dependent => :destroy  
-  
+  has_many :user_category_relationship_link_relationships, :dependent => :destroy
+  has_many :user_category_relationships, through: :user_category_relationship_link_relationships
 
   @@shorten_services = %w("bit.do" "goo.gl" "bitly.com" "tinyurl.com" "bit.ly") 
   
