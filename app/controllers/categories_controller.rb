@@ -43,6 +43,7 @@ class CategoriesController < ApplicationController
     user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: @category)
     @link = user_category_relationship.links.order("RANDOM()").first
     user_link_relationship = UserLinkRelationship.find_by(user: current_user, link: @link)
+    @read = user_link_relationship.read
     @review = user_link_relationship.link_reviews.build
     @current_reviews = user_link_relationship.link_reviews.order('created_at DESC').all
     @total_review = user_link_relationship.link_reviews.count  

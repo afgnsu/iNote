@@ -22,12 +22,19 @@ class UsersController < ApplicationController
   end
   
   def flashcard
-    @link = current_user.links.order("RANDOM()").first
+    random_user_link_relationship = current_user.user_link_relationships.where(read: false).order("RANDOM()").first
+    if random_user_link_relationship.nil?
+      flash[:danger] = "All links are read."
+      redirect_to :back and return            
+    end
+    
+    @link = Link.find_by(id: random_user_link_relationship.link_id)
     if @link.nil?
       flash[:danger] = "You don't have any links now!"
       redirect_to root_path and return
     end
     user_link_relationship = UserLinkRelationship.find_by(user: current_user, link: @link)
+    @read = user_link_relationship.read
     @review = user_link_relationship.link_reviews.build
     @current_reviews = user_link_relationship.link_reviews.order('created_at DESC').all
     @total_review = user_link_relationship.link_reviews.count 

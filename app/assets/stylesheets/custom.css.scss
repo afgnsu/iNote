@@ -91,6 +91,17 @@ span.glyphicon-eye-open {
   color: #000000 !important;
 }
 
+span.glyphicon-ok-circle {
+  color: #a6a6a6 !important; 
+  &:hover {
+    color: #008000 !important;
+  }
+}
+
+span.glyphicon-ok-circle-done {
+  color: #008000 !important;  
+}
+
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
@@ -363,6 +374,7 @@ tr.tr-go {
 .search_form {
   margin: 7px !important;
 }
+
 
 
 

@@ -122,9 +122,19 @@ class LinksController < ApplicationController
     end  
     
     @link = Link.find_by_id(params[:id]) 
+    @read = user_link_relationship.read 
     @review = user_link_relationship.link_reviews.build
     @current_reviews = user_link_relationship.link_reviews.order('created_at DESC').all
     @total_review = user_link_relationship.link_reviews.count
+  end
+  
+  def read
+    user_link_relationship = UserLinkRelationship.where(user_id: params[:user_id], link_id: params[:id]).first  
+    read = !user_link_relationship.read 
+    user_link_relationship.update(read: read)
+    respond_to do |format|
+      format.js
+    end    
   end
   
   private

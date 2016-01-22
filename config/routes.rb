@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   resources :users do
     resources :links do
       resources :link_reviews 
+      member do
+        post :read
+      end
     end
   end  
   

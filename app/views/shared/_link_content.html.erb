@@ -7,7 +7,17 @@
   <div class="col-md-7 link_show_left">
     <div class="panel panel-default">
       <div class="panel-heading link_image">
-        <h2><%= @link.link_title %></h2>
+        <h2><%= @link.link_title %>
+          <% if @read %>
+            <%= link_to read_user_link_path(current_user, @link), method: :post, remote: true do%>
+              <span class="glyphicon glyphicon-ok-circle glyphicon-ok-circle-done pull-right"></span>
+            <% end %>
+          <% else %>
+            <%= link_to read_user_link_path(current_user, @link), method: :post, remote: true do%>
+            <span class="glyphicon glyphicon-ok-circle pull-right"></span>
+            <% end %>
+          <% end %>
+        </h2>
       </div>
       <div class="panel-body">
         <%= image_tag @link.link_picture, alt: @link.description %>
