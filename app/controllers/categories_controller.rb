@@ -39,9 +39,15 @@ class CategoriesController < ApplicationController
   end
   
   def flashcard
+    
     @category = Category.find_by_id(params[:id])
     user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: @category)
-    @link = user_category_relationship.links.order("RANDOM()").first
+    @link = user_category_relationship.links.joins(:user_link_relationships).merge(UserLinkRelationship.where(read: false)).order("RANDOM()").first
+    if @link.nil?
+      flash[:danger] = "All links in this category are read."
+      redirect_to user_path(current_user) and return       
+    end
+    
     user_link_relationship = UserLinkRelationship.find_by(user: current_user, link: @link)
     @read = user_link_relationship.read
     @review = user_link_relationship.link_reviews.build
