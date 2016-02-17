@@ -40,7 +40,7 @@
             <div class="col-md-4">
               <div class="btn-group pull-right">
                 <% if any_reviews? link %> 
-                  <%= link_to user_link_path(current_user, link), "title": "<h4>Latest review <small>#{time_ago_in_words(latest_review(link).created_at)}</small></h4>", "data-toggle": "popover", "data-trigger": "hover", 
+                  <%= link_to user_link_path(current_user, link), :"title" => "<h4>Latest review <small>#{time_ago_in_words(latest_review(link).created_at)}</small></h4>", :"data-toggle" => "popover", :"data-trigger"=> "hover", 
                         "data-content": "<p>#{latest_review(link).content}</p>", "data-placement": "auto", class: "btn btn-default" do %>
                     <span class="glyphicon glyphicon-zoom-in"></span>
                   <% end %>
