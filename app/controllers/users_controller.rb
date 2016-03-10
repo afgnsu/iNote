@@ -26,6 +26,7 @@ class UsersController < ApplicationController
       flash[:danger] = "You don't have any links now."
       redirect_to :back and return        
     end
+    
     random_user_link_relationship = current_user.user_link_relationships.where(read: false).order("RANDOM()").first
     if random_user_link_relationship.nil?
       flash[:danger] = "All links are read."

@@ -11,34 +11,15 @@ class LinksController < ApplicationController
   end  
 
   def create
-    if params[:link][:link].exclude? "http://" and params[:link][:link].exclude? "https://" 
-      params[:link][:link] = "http://#{params[:link][:link]}"
+    url = LongurlService.new(params[:link][:link]).expand_url 
+    category = Category.create current_user, params[:category_id]
+    unless category
+      flash[:danger] = "This category is not yours or not existed."
+      redirect_to root_path        
     end
     
-    # for shorten URL
-    params[:link][:link] = URI::unescape(params[:link][:link])
-	  params[:link][:link] = URI::encode(params[:link][:link])    
-    uri = URI(params[:link][:link])
-    if @@shorten_services.any?{ |s| s[uri.host] }
-      params[:link][:link] = LongURL.expand(params[:link][:link])
-    end
     
-    if params[:category_id].to_i > 0 # add to one of current categories 
-      # if the category belongs to current user
-      category = current_user.categories.find_by_id(params[:category_id])   
-      if category.nil?
-        flash[:danger] = "This category is not yours or not existed."
-        redirect_to root_path      
-      end
-    else
-      # right now this part is not used
-      category = current_user.categories.find_by(name: "Unclassified")  
-      if category.nil?
-        category = current_user.categories.create(name: "Unclassified", private: true)
-      end      
-    end
-    
-    exist_link_of_all = Link.find_by(link: params[:link][:link])
+    exist_link_of_all = Link.find_by(link: url)
     user_category_relationship = UserCategoryRelationship.find_by(user: current_user, category: category)
     
     if exist_link_of_all.nil?
@@ -53,8 +34,8 @@ class LinksController < ApplicationController
       end            
     else
       
-      exist_link_of_category = category.links.find_by(link: params[:link][:link])
-      exist_link_of_user = current_user.links.find_by(link: params[:link][:link])
+      exist_link_of_category = category.links.find_by(link: url)
+      exist_link_of_user = current_user.links.find_by(link: url)
       
       if user_category_relationship.links.where(id: exist_link_of_all.id).count > 0
         flash[:danger] = "You created this link in this category before!"

@@ -10,4 +10,15 @@ class Category < ActiveRecord::Base
     user_category_relationship.links.count
   end
   
+  def self.create(user,category_id)
+    if category_id.to_i > 0 
+      category = user.categories.find_by_id(category_id)   
+    else
+      # right now this part is not used
+      category = user.categories.find_by(name: "Unclassified")  
+      if category.nil?
+        category = user.categories.create(name: "Unclassified", private: true)
+      end      
+    end    
+  end
 end
